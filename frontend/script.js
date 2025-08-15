@@ -150,3 +150,6 @@ async function handleClienteRegister(e) {
   }
   return false;
 }
+
+
+
