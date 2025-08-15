@@ -13,7 +13,11 @@ exports.create = (req, res) => {
     [nombre, codigo, descripcion, categoria, precio, stock, fecha_ingreso, proveedor],
     (err, result) => {
       if (err) return res.status(500).json({ error: err });
-      res.json({ id: result.insertId, nombre, codigo });
+      // Consultar el producto recién insertado y devolverlo completo
+      db.query('SELECT * FROM productos WHERE id = ?', [result.insertId], (err2, rows) => {
+        if (err2) return res.status(500).json({ error: err2 });
+        res.json(rows[0]);
+      });
     });
 };
 

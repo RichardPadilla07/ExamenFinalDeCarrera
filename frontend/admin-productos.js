@@ -59,6 +59,10 @@ async function handleCrearProducto(e) {
     });
     if (res.ok) {
       form.reset();
+      // Mostrar la sección de lista y recargar productos
+      if (window.mostrarSeccion && window.seccionListar) {
+        window.mostrarSeccion(window.seccionListar);
+      }
       cargarProductos();
     } else {
       const data = await res.json();

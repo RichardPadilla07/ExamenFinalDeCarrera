@@ -6,6 +6,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Admin</title>
   <style>
+    * {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -25,7 +30,7 @@
     }
 
     aside {
-      width: 220px;
+      width: 300px;
       background: #fff;
       color: #2575fc;
       padding: 50px 30px;
@@ -34,7 +39,7 @@
       align-items: center;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(106, 17, 203, 0.15);
-      height: 40vh;
+      height: 60vh;
       margin-left: 10px;
       /* 💡 Pequeño margen para que flote separado del borde */
     }
@@ -79,16 +84,26 @@
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(106, 17, 203, 0.15);
       min-height: 700px;
+
+      /* 👇 Centramos contenido */
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
+
+    main section {
+      margin: auto;
+    }
+
 
     .btn-salir {
       position: absolute;
-      top: 10px;
-      right: 10px;
+      top: 20px;
+      right: 20px;
       background: linear-gradient(90deg, #d32f2f, #2575fc);
       color: #fff;
       border: none;
-      padding: 10px 10px;
+      padding: 10px 30px;
       border-radius: 10px;
       font-weight: bold;
       cursor: pointer;
@@ -149,6 +164,7 @@
       <button id="btn-perfil" class="sidebar-btn">Perfil</button>
       <button id="btn-listar" class="sidebar-btn">Listar</button>
       <button id="btn-crear" class="sidebar-btn">Crear</button>
+      <button id="btn-pedidos" class="sidebar-btn">Pedidos</button>
     </aside>
 
     <main>
@@ -198,6 +214,12 @@
           <button type="submit" class="btn-login">Crear producto</button>
         </form>
       </section>
+
+      <section id="seccion-pedidos" style="display:none;">
+        <h2 style="color:#2575fc;margin-bottom:10px;">Gestión de pedidos</h2>
+        <p style="margin-bottom:20px;color:#444;">Aquí gestionas los pedidos.</p>
+        <!-- Aquí puedes agregar la interfaz de gestión de pedidos -->
+      </section>
     </main>
   </div>
 
@@ -205,20 +227,27 @@
     const btnPerfil = document.getElementById('btn-perfil');
     const btnListar = document.getElementById('btn-listar');
     const btnCrear = document.getElementById('btn-crear');
+    const btnPedidos = document.getElementById('btn-pedidos');
     const seccionPerfil = document.getElementById('seccion-perfil');
     const seccionListar = document.getElementById('seccion-listar');
     const seccionCrear = document.getElementById('seccion-crear');
+    const seccionPedidos = document.getElementById('seccion-pedidos');
+
+    window.seccionListar = seccionListar;
+    window.mostrarSeccion = mostrarSeccion;
 
     function mostrarSeccion(seccion) {
       seccionPerfil.style.display = 'none';
       seccionListar.style.display = 'none';
       seccionCrear.style.display = 'none';
+      seccionPedidos.style.display = 'none';
       seccion.style.display = 'block';
     }
 
     btnPerfil.onclick = () => mostrarSeccion(seccionPerfil);
     btnListar.onclick = () => mostrarSeccion(seccionListar);
     btnCrear.onclick = () => mostrarSeccion(seccionCrear);
+    btnPedidos.onclick = () => mostrarSeccion(seccionPedidos);
 
     mostrarSeccion(seccionPerfil);
 
@@ -229,6 +258,7 @@
       <strong>Rol:</strong> Administrador
     `;
   </script>
+  <script src="admin-productos.js"></script>
 </body>
 
 </html>
