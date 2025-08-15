@@ -11,12 +11,18 @@ exports.getAll = (req, res) => {
 // Crear usuario
 exports.create = (req, res) => {
   const { nombre, apellido, email, password } = req.body;
-  db.query('INSERT INTO usuarios (nombre, apellido, email, password) VALUES (?, ?, ?, ?)',
-    [nombre, apellido, email, password],
-    (err, result) => {
-  if (err) return res.status(500).json({ error: err.sqlMessage || err.message || String(err) });
-      res.json({ id: result.insertId, nombre, apellido, email });
-    });
+  db.query('SELECT id FROM usuarios WHERE email = ?', [email], (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    if (results.length > 0) {
+      return res.status(400).json({ error: 'Ya existe un usuario con ese correo.' });
+    }
+    db.query('INSERT INTO usuarios (nombre, apellido, email, password) VALUES (?, ?, ?, ?)',
+      [nombre, apellido, email, password],
+      (err, result) => {
+        if (err) return res.status(500).json({ error: err.sqlMessage || err.message || String(err) });
+        res.json({ id: result.insertId, nombre, apellido, email });
+      });
+  });
 };
 
 // Actualizar usuario

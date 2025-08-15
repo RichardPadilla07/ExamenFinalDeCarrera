@@ -14,36 +14,42 @@
       <button onclick="showClienteLogin()">Cliente</button>
     </div>
 
-    <form id="admin-login" class="hidden" onsubmit="return handleAdminLogin(event)">
+  <form id="admin-login" class="hidden" onsubmit="return handleAdminLogin(event)">
       <h2>Login Usuario (Admin)</h2>
       <input type="email" id="admin-email" placeholder="Email" required>
       <input type="password" id="admin-password" placeholder="Contraseña" required>
-      <button type="submit">Ingresar</button>
-      <p class="link" onclick="showAdminRegister()">¿No tienes cuenta? Regístrate</p>
-      <div class="notification" id="admin-login-notif"></div>
+  <button type="submit">Ingresar</button>
+  <p>----- ó -----</p>
+  <button type="button" onclick="window.location.href='index.html'" style="margin-top:10px;">Escoger rol</button>
+  <p class="link" onclick="showAdminRegister()">¿No tienes cuenta? Regístrate</p>
+  <div class="notification" id="admin-login-notif"></div>
     </form>
 
-    <form id="admin-register" class="hidden" onsubmit="return handleAdminRegister(event)">
+  <form id="admin-register" class="hidden" onsubmit="return handleAdminRegister(event)">
       <h2>Registro Usuario (Admin)</h2>
       <input type="text" id="admin-nombre" placeholder="Nombre" required maxlength="30">
       <input type="text" id="admin-apellido" placeholder="Apellido" required maxlength="20">
       <input type="email" id="admin-reg-email" placeholder="Email" required maxlength="30">
       <input type="password" id="admin-reg-password" placeholder="Contraseña" required maxlength="20">
       <button type="submit">Registrar</button>
+      <button type="button" onclick="window.location.href='index.html'" style="margin-top:10px;">Escoger rol</button>
+      <p>----- ó -----</p>
       <p class="link" onclick="showAdminLogin()">¿Ya tienes cuenta? Inicia sesión</p>
-      <div class="notification" id="admin-register-notif"></div>
+  <div class="notification" id="admin-register-notif"></div>
     </form>
 
-    <form id="cliente-login" class="hidden" onsubmit="return handleClienteLogin(event)">
+  <form id="cliente-login" class="hidden" onsubmit="return handleClienteLogin(event)">
       <h2>Login Cliente</h2>
       <input type="number" id="cliente-cedula" placeholder="Cédula" required>
       <input type="password" id="cliente-password" placeholder="Contraseña" required>
-      <button type="submit">Ingresar</button>
-      <p class="link" onclick="showClienteRegister()">¿No tienes cuenta? Regístrate</p>
-      <div class="notification" id="cliente-login-notif"></div>
+  <button type="submit">Ingresar</button>
+  <p>----- ó -----</p>
+  <button type="button" onclick="window.location.href='index.html'" style="margin-top:10px;">Escoger rol</button>
+  <p class="link" onclick="showClienteRegister()">¿No tienes cuenta? Regístrate</p>
+  <div class="notification" id="cliente-login-notif"></div>
     </form>
 
-    <form id="cliente-register" class="hidden" onsubmit="return handleClienteRegister(event)">
+  <form id="cliente-register" class="hidden" onsubmit="return handleClienteRegister(event)">
       <h2>Registro Cliente</h2>
       <input type="number" id="cliente-cedula-reg" placeholder="Cédula" required>
   <input type="text" id="cliente-nombre" placeholder="Nombre" required maxlength="10">
@@ -55,8 +61,10 @@
       <input type="date" id="cliente-fecha-nacimiento" placeholder="Fecha de nacimiento">
       <input type="password" id="cliente-reg-password" placeholder="Contraseña" required maxlength="20">
       <button type="submit">Registrar</button>
+      <button type="button" onclick="window.location.href='index.html'" style="margin-top:10px;">Escoger rol</button>
+      <p>----- ó -----</p>
       <p class="link" onclick="showClienteLogin()">¿Ya tienes cuenta? Inicia sesión</p>
-      <div class="notification" id="cliente-register-notif"></div>
+  <div class="notification" id="cliente-register-notif"></div>
     </form>
   </div>
   <script src="script.js"></script>
