@@ -41,7 +41,6 @@
       box-shadow: 0 8px 32px rgba(106, 17, 203, 0.15);
       height: 60vh;
       margin-left: 10px;
-      /* 💡 Pequeño margen para que flote separado del borde */
     }
 
     .admin-info {
@@ -83,9 +82,7 @@
       position: relative;
       border-radius: 20px;
       box-shadow: 0 8px 32px rgba(106, 17, 203, 0.15);
-      min-height: 700px;
-
-      /* 👇 Centramos contenido */
+      min-height: 600px;
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -194,7 +191,7 @@
       </div>
 
       <section id="seccion-listar" style="display:none;">
-        <h2 style="color:#2575fc;margin-bottom:10px;">Listar productos</h2>
+    <h2 class="form-title">Listar productos</h2>
         <p style="margin-bottom:20px;color:#444;">Este módulo te permite gestionar productos existentes.</p>
         <table>
           <thead>
@@ -235,7 +232,7 @@
       </div>
 
       <section id="seccion-crear" style="display:none;">
-        <h2 style="color:#2575fc;margin-bottom:10px;">Crear producto</h2>
+    <h2 class="form-title">Gestión de pedidos</h2>
         <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo producto.</p>
         <form id="form-producto" style="margin-bottom:20px;max-width:500px;">
           <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
