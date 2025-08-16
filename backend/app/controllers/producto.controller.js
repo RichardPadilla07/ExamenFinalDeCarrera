@@ -32,6 +32,15 @@ exports.update = (req, res) => {
     });
 };
 
+exports.getById = (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM productos WHERE id = ?', [id], (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    if (results.length === 0) return res.status(404).json({ error: 'Producto no encontrado' });
+    res.json(results[0]);
+  });
+};
+
 exports.delete = (req, res) => {
   const { id } = req.params;
   db.query('DELETE FROM productos WHERE id=?', [id], (err) => {

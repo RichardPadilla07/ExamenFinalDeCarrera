@@ -159,6 +159,7 @@
     <aside>
       <div class="admin-info">
         <div>Bienvenido - <span id="admin-nombre">Richard Padilla</span></div>
+        <p></p>
         <div style="opacity: .9;">Rol - Administrador</div>
       </div>
       <button id="btn-perfil" class="sidebar-btn">Perfil</button>
@@ -172,10 +173,25 @@
 
       <section id="seccion-perfil" style="display:none;">
         <h2 style="color:#2575fc;margin-bottom:10px;">Perfil</h2>
-        <p style="margin-bottom:20px;color:#444;">Aquí puedes ver los datos con los que ingresaste como administrador.
-        </p>
+        <p style="margin-bottom:20px;color:#444;">Aquí puedes ver los datos con los que ingresaste como administrador.</p>
         <div id="datos-perfil" style="background:#f3f3f3;padding:20px;border-radius:10px;max-width:400px;"></div>
+        <button id="btn-actualizar-perfil" class="btn-login" style="margin-top:18px;width:100%;max-width:400px;">Actualizar perfil</button>
       </section>
+
+      <!-- Modal para actualizar perfil -->
+      <div id="modal-actualizar-perfil" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Editar perfil</h2>
+          <form id="form-actualizar-perfil">
+            <input type="text" name="nombre" placeholder="Nombre" required maxlength="20" class="input-login">
+            <input type="text" name="apellido" placeholder="Apellido" required maxlength="20" class="input-login">
+            <input type="email" name="email" placeholder="Email" required maxlength="40" class="input-login">
+            <input type="password" name="password" placeholder="Nueva contraseña" class="input-login">
+            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+            <button type="button" id="btn-cerrar-modal" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+          </form>
+        </div>
+      </div>
 
       <section id="seccion-listar" style="display:none;">
         <h2 style="color:#2575fc;margin-bottom:10px;">Listar productos</h2>
@@ -199,6 +215,25 @@
         </table>
       </section>
 
+      <!-- Modal para editar producto -->
+      <div id="modal-editar-producto" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Editar producto</h2>
+          <form id="form-editar-producto">
+            <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+            <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
+            <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
+            <input type="text" name="categoria" placeholder="Categoría" maxlength="20" class="input-login">
+            <input type="number" name="precio" placeholder="Precio" step="0.01" required class="input-login">
+            <input type="number" name="stock" placeholder="Stock" required class="input-login">
+            <input type="date" name="fecha_ingreso" placeholder="Fecha ingreso" class="input-login">
+            <input type="text" name="proveedor" placeholder="Proveedor" maxlength="20" class="input-login">
+            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+            <button type="button" id="btn-cerrar-modal-editar" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
       <section id="seccion-crear" style="display:none;">
         <h2 style="color:#2575fc;margin-bottom:10px;">Crear producto</h2>
         <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo producto.</p>
@@ -218,12 +253,11 @@
       <section id="seccion-pedidos" style="display:none;">
         <h2 style="color:#2575fc;margin-bottom:10px;">Gestión de pedidos</h2>
         <p style="margin-bottom:20px;color:#444;">Aquí gestionas los pedidos.</p>
-        <!-- Aquí puedes agregar la interfaz de gestión de pedidos -->
-      </section>
         <section>
           <h2>Pedidos recibidos</h2>
           <div id="pedidos-container"></div>
         </section>
+      </section>
     </main>
   </div>
 
@@ -255,12 +289,84 @@
 
     mostrarSeccion(seccionPerfil);
 
-    document.getElementById('datos-perfil').innerHTML = `
-      <strong>Nombre:</strong> Richard<br>
-      <strong>Apellido:</strong> Padilla<br>
-      <strong>Email:</strong> richardpadilla3rod@gmail.com<br>
-      <strong>Rol:</strong> Administrador
-    `;
+
+    // Variable global para el ID del admin (puedes setearla al iniciar sesión)
+    let adminId = 1;
+    let datosAdmin = {};
+
+    async function obtenerDatosAdmin() {
+      try {
+        const res = await fetch(`http://localhost:3000/api/usuarios/${adminId}`);
+        if (res.ok) {
+          datosAdmin = await res.json();
+          renderPerfil();
+          renderSaludo();
+        }
+      } catch (err) {
+        console.error('Error al obtener datos del admin:', err);
+      }
+    }
+
+    function renderPerfil() {
+      document.getElementById('datos-perfil').innerHTML = `
+        <strong>Nombre:</strong> ${datosAdmin.nombre || ''}<br>
+        <strong>Apellido:</strong> ${datosAdmin.apellido || ''}<br>
+        <strong>Email:</strong> ${datosAdmin.email || ''}<br>
+        <strong>Rol:</strong> ${datosAdmin.rol || 'Administrador'}
+      `;
+    }
+
+    function renderSaludo() {
+      document.getElementById('admin-nombre').textContent = `${datosAdmin.nombre || ''} ${datosAdmin.apellido || ''}`;
+    }
+
+    // Modal lógica (solo un bloque)
+    const btnActualizarPerfil = document.getElementById('btn-actualizar-perfil');
+    const modalActualizar = document.getElementById('modal-actualizar-perfil');
+    const formActualizar = document.getElementById('form-actualizar-perfil');
+    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+
+    btnActualizarPerfil.onclick = () => {
+      // Rellenar el formulario con los datos actuales
+      formActualizar.nombre.value = datosAdmin.nombre || '';
+      formActualizar.apellido.value = datosAdmin.apellido || '';
+      formActualizar.email.value = datosAdmin.email || '';
+      formActualizar.password.value = '';
+      modalActualizar.style.display = 'flex';
+    };
+
+    btnCerrarModal.onclick = () => {
+      modalActualizar.style.display = 'none';
+    };
+
+    formActualizar.onsubmit = async function(e) {
+      e.preventDefault();
+      const datos = {
+        nombre: formActualizar.nombre.value.trim(),
+        apellido: formActualizar.apellido.value.trim(),
+        email: formActualizar.email.value.trim(),
+        password: formActualizar.password.value.trim()
+      };
+      try {
+        const res = await fetch(`http://localhost:3000/api/usuarios/${adminId}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        if (res.ok) {
+          await obtenerDatosAdmin();
+          modalActualizar.style.display = 'none';
+          alert('Perfil actualizado correctamente');
+        } else {
+          alert('Error al actualizar perfil');
+        }
+      } catch (err) {
+        alert('Error de conexión');
+      }
+    };
+
+    // Obtener datos al cargar la página
+    document.addEventListener('DOMContentLoaded', obtenerDatosAdmin);
   </script>
   <script src="admin-productos.js"></script>
 </body>

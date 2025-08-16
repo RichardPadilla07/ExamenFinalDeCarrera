@@ -152,7 +152,55 @@ window.eliminarProducto = async function(id) {
   }
 }
 
-window.editarProducto = function(id) {
-  // Puedes implementar un modal o formulario de edición aquí
-  alert('Funcionalidad de edición pendiente para el producto ID: ' + id);
+window.editarProducto = async function(id) {
+  try {
+    const res = await fetch(`${API_URL}/${id}`);
+    if (!res.ok) return alert('No se pudo obtener el producto');
+    const prod = await res.json();
+    const modal = document.getElementById('modal-editar-producto');
+    const form = document.getElementById('form-editar-producto');
+    form.nombre.value = prod.nombre || '';
+    form.codigo.value = prod.codigo || '';
+    form.descripcion.value = prod.descripcion || '';
+    form.categoria.value = prod.categoria || '';
+    form.precio.value = prod.precio || '';
+    form.stock.value = prod.stock || '';
+    form.fecha_ingreso.value = prod.fecha_ingreso ? prod.fecha_ingreso.substring(0,10) : '';
+    form.proveedor.value = prod.proveedor || '';
+    modal.style.display = 'flex';
+    form.onsubmit = async function(e) {
+      e.preventDefault();
+      const datos = {
+        nombre: form.nombre.value.trim(),
+        codigo: form.codigo.value.trim(),
+        descripcion: form.descripcion.value.trim(),
+        categoria: form.categoria.value.trim(),
+        precio: parseFloat(form.precio.value),
+        stock: parseInt(form.stock.value),
+        fecha_ingreso: form.fecha_ingreso.value,
+        proveedor: form.proveedor.value.trim()
+      };
+      try {
+        const res = await fetch(`${API_URL}/${id}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        if (res.ok) {
+          modal.style.display = 'none';
+          cargarProductos();
+          alert('Producto actualizado correctamente');
+        } else {
+          alert('Error al actualizar producto');
+        }
+      } catch (err) {
+        alert('Error de conexión');
+      }
+    };
+    document.getElementById('btn-cerrar-modal-editar').onclick = () => {
+      modal.style.display = 'none';
+    };
+  } catch (err) {
+    alert('Error de conexión');
+  }
 }

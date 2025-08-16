@@ -37,6 +37,16 @@ exports.update = (req, res) => {
     });
 };
 
+// Obtener usuario por id
+exports.getById = (req, res) => {
+  const { id } = req.params;
+  db.query('SELECT * FROM usuarios WHERE id = ?', [id], (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    if (results.length === 0) return res.status(404).json({ error: 'Usuario no encontrado' });
+    res.json(results[0]);
+  });
+};
+
 // Eliminar usuario
 exports.delete = (req, res) => {
   const { id } = req.params;
