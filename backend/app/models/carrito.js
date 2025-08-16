@@ -1,31 +1,22 @@
-const { DataTypes } = require('sequelize');
 const db = require('./db');
 
-const Carrito = db.define('carrito', {
-    id: {
-        type: DataTypes.INTEGER,
-        autoIncrement: true,
-        primaryKey: true
+const Carrito = {
+    create: (data, callback) => {
+        const sql = 'INSERT INTO carrito (id_cliente, id_producto, cantidad, fecha_agregado) VALUES (?, ?, ?, NOW())';
+        db.query(sql, [data.id_cliente, data.id_producto, data.cantidad], callback);
     },
-    id_cliente: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+
+    getAll: (callback) => {
+        db.query('SELECT * FROM carrito', callback);
     },
-    id_producto: {
-        type: DataTypes.INTEGER,
-        allowNull: false
+
+    getById: (id, callback) => {
+        db.query('SELECT * FROM carrito WHERE id = ?', [id], callback);
     },
-    cantidad: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
-        defaultValue: 1
-    },
-    fecha_agregado: {
-        type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+
+    delete: (id, callback) => {
+        db.query('DELETE FROM carrito WHERE id = ?', [id], callback);
     }
-}, {
-    timestamps: false
-});
+};
 
 module.exports = Carrito;

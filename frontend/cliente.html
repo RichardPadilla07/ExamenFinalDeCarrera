@@ -499,8 +499,32 @@
 
     // Función para agregar al carrito (puedes implementar la lógica que desees)
     function agregarAlCarrito(productoId) {
-      alert('Producto agregado al carrito: ' + productoId);
-      // Aquí puedes agregar la lógica real para añadir al carrito
+      // Ejemplo: obtener el id_cliente (puedes cambiar esto según tu lógica de login)
+      const id_cliente = localStorage.getItem('id_cliente') || 1; // Cambia esto por el id real del cliente
+      const cantidad = 1; // Puedes permitir elegir cantidad si lo deseas
+
+      fetch('http://localhost:3000/api/carrito', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          id_cliente,
+          id_producto: productoId,
+          cantidad
+        })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.id) {
+          alert('Producto agregado al carrito correctamente.');
+        } else {
+          alert('Error al agregar al carrito: ' + (data.error || '')); 
+        }
+      })
+      .catch(err => {
+        alert('Error de conexión al agregar al carrito.');
+      });
     }
 
     // Obtener productos y renderizar tabla
