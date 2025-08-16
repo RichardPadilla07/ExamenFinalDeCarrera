@@ -227,7 +227,7 @@
       </div>
       <button id="btn-perfil" class="sidebar-btn">Perfil</button>
       <button id="btn-listar" class="sidebar-btn">Listar</button>
-      <button id="btn-crear" class="sidebar-btn">Crear</button>
+  <button id="btn-carrito" class="sidebar-btn">Carrito</button>
       <button id="btn-pedidos" class="sidebar-btn">Pedidos</button>
     </aside>
     <main>
@@ -304,43 +304,11 @@
         </div>
       </div>
 
-      <section id="seccion-crear" style="display:none;position:relative;">
-        <div id="carrusel-crear" style="display:flex;flex-direction:row;align-items:center;justify-content:center;position:relative;min-height:500px;width:100%;max-width:700px;margin:auto;">
-          <button id="btn-carrusel-izq" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-right:64px;flex-shrink:0;">&#8592;</button>
-          <div style="width:100%;max-width:500px;">
-            <div class="slide-crear" id="slide-crear-producto" style="min-width:0;max-width:500px;">
-              <h2 style="color:#2575fc;margin-bottom:10px;">Crear Producto</h2>
-              <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo producto.</p>
-              <form id="form-producto" style="margin-bottom:20px;max-width:500px;">
-                <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
-                <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
-                <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
-                <input type="text" name="categoria" placeholder="Categoría" maxlength="20" class="input-login">
-                <input type="number" name="precio" placeholder="Precio" step="0.01" required class="input-login">
-                <input type="number" name="stock" placeholder="Stock" required class="input-login">
-                <input type="date" name="fecha_ingreso" placeholder="Fecha ingreso" class="input-login">
-                <input type="text" name="proveedor" placeholder="Proveedor" maxlength="20" class="input-login">
-                <button type="submit" class="btn-login">Crear producto</button>
-              </form>
-            </div>
-            <div class="slide-crear" id="slide-crear-cliente" style="display:none;min-width:0;max-width:500px;">
-              <h2 class="form-title">Crear cliente</h2>
-              <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo cliente.</p>
-              <form id="form-cliente" style="margin-bottom:20px;max-width:500px;">
-                <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
-                <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
-                <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
-                <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
-                <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
-                <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
-                <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
-                <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
-                <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30" class="input-login">
-                <button type="submit" class="btn-login">Crear cliente</button>
-              </form>
-            </div>
-          </div>
-          <button id="btn-carrusel-der" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-left:64px;flex-shrink:0;">&#8594;</button>
+      <section id="seccion-carrito" style="display:none;position:relative;">
+        <div id="carrito" style="min-height:300px;width:100%;max-width:700px;margin:auto;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Carrito</h2>
+          <p style="margin-bottom:20px;color:#444;">Este módulo gestionas tu carrito.</p>
+          <!-- Aquí puedes agregar la lógica y elementos del carrito -->
         </div>
       </section>
 
@@ -377,11 +345,11 @@
   <script>
     const btnPerfil = document.getElementById('btn-perfil');
     const btnListar = document.getElementById('btn-listar');
-    const btnCrear = document.getElementById('btn-crear');
+  const btnCarrito = document.getElementById('btn-carrito');
     const btnPedidos = document.getElementById('btn-pedidos');
     const seccionPerfil = document.getElementById('seccion-perfil');
     const seccionListar = document.getElementById('seccion-listar');
-    const seccionCrear = document.getElementById('seccion-crear');
+  const seccionCarrito = document.getElementById('seccion-carrito');
     const seccionPedidos = document.getElementById('seccion-pedidos');
 
     window.seccionListar = seccionListar;
@@ -390,14 +358,14 @@
     function mostrarSeccion(seccion) {
       seccionPerfil.style.display = 'none';
       seccionListar.style.display = 'none';
-      seccionCrear.style.display = 'none';
+      seccionCarrito.style.display = 'none';
       seccionPedidos.style.display = 'none';
       seccion.style.display = 'block';
     }
 
     btnPerfil.onclick = () => mostrarSeccion(seccionPerfil);
     btnListar.onclick = () => mostrarSeccion(seccionListar);
-    btnCrear.onclick = () => mostrarSeccion(seccionCrear);
+  btnCarrito.onclick = () => mostrarSeccion(seccionCarrito);
     btnPedidos.onclick = () => mostrarSeccion(seccionPedidos);
 
     mostrarSeccion(seccionPerfil);
