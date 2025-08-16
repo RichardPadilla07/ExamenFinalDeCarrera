@@ -8,7 +8,8 @@ module.exports = (sequelize, DataTypes) => {
     email: { type: DataTypes.STRING(30), allowNull: false, unique: true },
     direccion: { type: DataTypes.STRING(20) },
     telefono: { type: DataTypes.STRING(10) },
-    fecha_nacimiento: { type: DataTypes.DATE }
+    fecha_nacimiento: { type: DataTypes.DATE },
+    passwordCliente: { type: DataTypes.STRING(30) }
   }, {
     tableName: 'clientes',
     timestamps: false

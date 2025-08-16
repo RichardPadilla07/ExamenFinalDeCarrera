@@ -1,17 +1,572 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Panel Cliente</title>
-  <link rel="stylesheet" href="styles.css">
+  <style>
+    * {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      padding: 0;
+      min-height: 100vh;
+      background: linear-gradient(135deg, #6a11cb, #2575fc);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      width: 90%;
+      max-width: 1700px;
+    }
+
+    aside {
+      width: 300px;
+      background: #fff;
+      color: #2575fc;
+      padding: 50px 30px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(106, 17, 203, 0.15);
+      height: 60vh;
+      margin-left: 10px;
+    }
+
+    .admin-info {
+      margin-bottom: 30px;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    .admin-info div:first-child {
+      font-weight: bold;
+      font-size: 18px;
+      color: #444;
+    }
+
+    .sidebar-btn {
+      background: #fff;
+      color: #2575fc;
+      border: none;
+      border-radius: 10px;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 15px 0;
+      margin-bottom: 18px;
+      cursor: pointer;
+      box-shadow: 0 2px 8px rgba(106, 17, 203, 0.08);
+      width: 100%;
+    }
+
+    .sidebar-btn:hover {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: #fff;
+    }
+
+    main {
+      flex: 1;
+      max-width: 1500px;
+      background: #fff;
+      padding: 100px 30px;
+      position: relative;
+      border-radius: 20px;
+      box-shadow: 0 8px 32px rgba(106, 17, 203, 0.15);
+      max-height: 650px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    main section {
+      margin: auto;
+    }
+
+
+    .btn-salir {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: linear-gradient(90deg, #d32f2f, #2575fc);
+      color: #fff;
+      border: none;
+      padding: 10px 30px;
+      border-radius: 10px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 18px;
+    }
+
+    #form-producto,
+    #form-cliente {
+      max-width: 420px;
+      margin: auto;
+    }
+
+    .input-login {
+      background: #f3f3f3;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      padding: 10px;
+      margin-bottom: 6px;
+      font-size: 16px;
+      width: 100%;
+    }
+
+    .btn-login {
+      background: linear-gradient(90deg, #6a11cb, #2575fc);
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      font-weight: bold;
+      font-size: 18px;
+      padding: 12px 0;
+      cursor: pointer;
+      width: 100%;
+    }
+
+    .btn-login:hover {
+      opacity: 0.85;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+    }
+
+    th,
+    td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f3f3f3;
+    }
+
+    #carrusel-listar {
+      max-width: 1500px;
+    }
+
+    .slide-listar {
+      max-width: 1500px;
+    }
+
+    #slide-listar-cliente table,
+    #slide-listar-producto table {
+      min-width: 0;
+      width: 100%;
+    }
+
+    @media (max-width: 700px) {
+      .container {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        min-width: 0;
+      }
+
+      aside {
+        width: 100%;
+        margin-left: 0;
+        margin-bottom: 20px;
+        height: auto;
+        padding: 30px 10px;
+        border-radius: 0 0 20px 20px;
+      }
+
+      main {
+        padding: 20px 10px;
+        min-height: 400px;
+        border-radius: 20px 20px 0 0;
+      }
+
+      #carrusel-crear {
+        min-height: 0;
+        max-width: 100%;
+        padding: 0;
+      }
+
+      .slide-crear {
+        max-width: 100%;
+        min-width: 0;
+      }
+
+      #carrusel-crear>div {
+        max-width: 100%;
+      }
+
+      #carrusel-crear button {
+        width: 36px;
+        height: 36px;
+        font-size: 20px;
+      }
+    }
+  </style>
 </head>
+
 <body>
   <div class="container">
-    <h1>Bienvenido, Cliente</h1>
-    <p>Acceso al módulo de cliente.</p>
-  <a href="index.html">Cerrar sesión</a>
-  <button onclick="window.location.href='index.html'" style="margin-top:15px;">Escoger rol</button>
+    <aside>
+      <div class="admin-info">
+        <div>Bienvenido - <span id="cliente-nombre"></span></div>
+        <p></p>
+        <div style="opacity: .9;">Rol - Cliente</div>
+      </div>
+      <button id="btn-perfil" class="sidebar-btn">Perfil</button>
+      <button id="btn-listar" class="sidebar-btn">Listar</button>
+      <button id="btn-crear" class="sidebar-btn">Crear</button>
+      <button id="btn-pedidos" class="sidebar-btn">Pedidos</button>
+    </aside>
+    <main>
+      <button onclick="window.location.href='index.html'" class="btn-salir">Salir</button>
+      <section id="seccion-perfil" style="display:none;">
+        <h2 style="color:#2575fc;margin-bottom:10px;">Perfil</h2>
+        <p style="margin-bottom:20px;color:#444;">Aquí puedes ver tus datos como cliente.</p>
+        <div id="datos-perfil" style="background:#f3f3f3;padding:20px;border-radius:10px;max-width:400px;"></div>
+        <button id="btn-actualizar-perfil" class="btn-login" style="margin-top:18px;width:100%;max-width:400px;">Actualizar perfil</button>
+      </section>
+
+      <!-- Modal para actualizar perfil -->
+      <div id="modal-actualizar-perfil" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Editar perfil</h2>
+          <form id="form-actualizar-perfil">
+            <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login" disabled>
+            <input type="text" name="nombre" placeholder="Nombre" required maxlength="20" class="input-login">
+            <input type="text" name="apellido" placeholder="Apellido" required maxlength="20" class="input-login">
+            <input type="email" name="email" placeholder="Email" required maxlength="40" class="input-login">
+            <input type="text" name="ciudad" placeholder="Ciudad" maxlength="20" class="input-login">
+            <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
+            <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
+            <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
+            <input type="password" name="password" placeholder="Nueva contraseña" class="input-login">
+            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+            <button type="button" id="btn-cerrar-modal" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
+      <section id="seccion-listar" style="display:none;position:relative;">
+        <div id="carrusel-listar" style="display:flex;flex-direction:row;align-items:center;justify-content:center;position:relative;min-height:400px;width:100%;max-width:900px;margin:auto;">
+          <button id="btn-carrusel-listar-izq" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-right:16px;flex-shrink:0;">&#8592;</button>
+          <div style="width:100%;max-width:900px;display:flex;justify-content:center;">
+            <div class="slide-listar" id="slide-listar-producto" style="min-width:0;max-width:900px;">
+              <h2 class="form-title">Listar productos</h2>
+              <p style="margin-bottom:20px;color:#444;">Este módulo te permite gestionar productos existentes.</p>
+              <div style="overflow-x:auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 8px 32px rgba(106,17,203,0.08);">
+                <table style="min-width:700px;width:100%;">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>Nombre</th>
+                      <th>Código</th>
+                      <th>Descripción</th>
+                      <th>Categoría</th>
+                      <th>Precio</th>
+                      <th>Stock</th>
+                      <th>Fecha ingreso</th>
+                      <th>Proveedor</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-productos-body"></tbody>
+                </table>
+              </div>
+            </div>
+            <div class="slide-listar" id="slide-listar-cliente" style="display:none;min-width:0;max-width:900px;">
+              <h2 class="form-title">Listar clientes</h2>
+              <p style="margin-bottom:20px;color:#444;">Este módulo te permite gestionar clientes existentes.</p>
+              <div style="overflow-x:auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 8px 32px rgba(106,17,203,0.08);">
+                <table style="min-width:900px;width:100%;">
+                  <thead>
+                    <tr>
+                      <th>N°</th>
+                      <th>Cédula</th>
+                      <th>Nombre</th>
+                      <th>Apellido</th>
+                      <th>Ciudad</th>
+                      <th>Email</th>
+                      <th>Dirección</th>
+                      <th>Teléfono</th>
+                      <th>Fecha nacimiento</th>
+                      <th>Acciones</th>
+                    </tr>
+                  </thead>
+                  <tbody id="tabla-clientes-body"></tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+          <button id="btn-carrusel-listar-der" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-left:16px;flex-shrink:0;">&#8594;</button>
+        </div>
+      </section>
+
+      <!-- Modal para editar producto -->
+      <div id="modal-editar-producto" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Editar producto</h2>
+          <form id="form-editar-producto">
+            <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+            <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
+            <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
+            <input type="text" name="categoria" placeholder="Categoría" maxlength="20" class="input-login">
+            <input type="number" name="precio" placeholder="Precio" step="0.01" required class="input-login">
+            <input type="number" name="stock" placeholder="Stock" required class="input-login">
+            <input type="date" name="fecha_ingreso" placeholder="Fecha ingreso" class="input-login">
+            <input type="text" name="proveedor" placeholder="Proveedor" maxlength="20" class="input-login">
+            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+            <button type="button" id="btn-cerrar-modal-editar" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+          </form>
+        </div>
+      </div>
+
+      <section id="seccion-crear" style="display:none;position:relative;">
+        <div id="carrusel-crear" style="display:flex;flex-direction:row;align-items:center;justify-content:center;position:relative;min-height:500px;width:100%;max-width:700px;margin:auto;">
+          <button id="btn-carrusel-izq" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-right:64px;flex-shrink:0;">&#8592;</button>
+          <div style="width:100%;max-width:500px;">
+            <div class="slide-crear" id="slide-crear-producto" style="min-width:0;max-width:500px;">
+              <h2 class="form-title">Crear producto</h2>
+              <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo producto.</p>
+              <form id="form-producto" style="margin-bottom:20px;max-width:500px;">
+                <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+                <input type="text" name="codigo" placeholder="Código" required maxlength="20" class="input-login">
+                <input type="text" name="descripcion" placeholder="Descripción" maxlength="30" class="input-login">
+                <input type="text" name="categoria" placeholder="Categoría" maxlength="20" class="input-login">
+                <input type="number" name="precio" placeholder="Precio" step="0.01" required class="input-login">
+                <input type="number" name="stock" placeholder="Stock" required class="input-login">
+                <input type="date" name="fecha_ingreso" placeholder="Fecha ingreso" class="input-login">
+                <input type="text" name="proveedor" placeholder="Proveedor" maxlength="20" class="input-login">
+                <button type="submit" class="btn-login">Crear producto</button>
+              </form>
+            </div>
+            <div class="slide-crear" id="slide-crear-cliente" style="display:none;min-width:0;max-width:500px;">
+              <h2 class="form-title">Crear cliente</h2>
+              <p style="margin-bottom:20px;color:#444;">Completa el formulario para agregar un nuevo cliente.</p>
+              <form id="form-cliente" style="margin-bottom:20px;max-width:500px;">
+                <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
+                <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+                <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
+                <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
+                <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
+                <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
+                <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
+                <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
+                <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30" class="input-login">
+                <button type="submit" class="btn-login">Crear cliente</button>
+              </form>
+            </div>
+          </div>
+          <button id="btn-carrusel-der" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-left:64px;flex-shrink:0;">&#8594;</button>
+        </div>
+      </section>
+
+      <section id="seccion-pedidos" style="display:none;">
+        <h2 style="color:#2575fc;margin-bottom:10px;">Gestión de pedidos</h2>
+        <p style="margin-bottom:20px;color:#444;">Aquí gestionas los pedidos.</p>
+        <section>
+          <h2>Pedidos recibidos</h2>
+          <div id="pedidos-container"></div>
+        </section>
+      </section>
+    </main>
+      <!-- Modal para editar cliente (mover aquí, fuera de la sección 'Crear') -->
+      <div id="modal-editar-cliente" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Editar cliente</h2>
+          <form id="form-editar-cliente">
+            <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
+            <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+            <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
+            <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
+            <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
+            <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
+            <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
+            <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
+            <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30" class="input-login">
+            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+            <button type="button" id="btn-cerrar-modal-editar-cliente" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+          </form>
+        </div>
+      </div>
   </div>
+
+  <script>
+    const btnPerfil = document.getElementById('btn-perfil');
+    const btnListar = document.getElementById('btn-listar');
+    const btnCrear = document.getElementById('btn-crear');
+    const btnPedidos = document.getElementById('btn-pedidos');
+    const seccionPerfil = document.getElementById('seccion-perfil');
+    const seccionListar = document.getElementById('seccion-listar');
+    const seccionCrear = document.getElementById('seccion-crear');
+    const seccionPedidos = document.getElementById('seccion-pedidos');
+
+    window.seccionListar = seccionListar;
+    window.mostrarSeccion = mostrarSeccion;
+
+    function mostrarSeccion(seccion) {
+      seccionPerfil.style.display = 'none';
+      seccionListar.style.display = 'none';
+      seccionCrear.style.display = 'none';
+      seccionPedidos.style.display = 'none';
+      seccion.style.display = 'block';
+    }
+
+    btnPerfil.onclick = () => mostrarSeccion(seccionPerfil);
+    btnListar.onclick = () => mostrarSeccion(seccionListar);
+    btnCrear.onclick = () => mostrarSeccion(seccionCrear);
+    btnPedidos.onclick = () => mostrarSeccion(seccionPedidos);
+
+    mostrarSeccion(seccionPerfil);
+
+
+    // Variable global para el ID del admin (puedes setearla al iniciar sesión)
+    let clienteCedula = localStorage.getItem('clienteCedula') || '1753078839'; // Cambia esto por la lógica real de login
+    let datosCliente = {};
+
+    async function obtenerDatosCliente() {
+      try {
+        const res = await fetch(`http://localhost:3000/api/clientes/${clienteCedula}`);
+        if (res.ok) {
+          datosCliente = await res.json();
+          renderPerfilCliente();
+          renderSaludoCliente();
+        }
+      } catch (err) {
+        console.error('Error al obtener datos del cliente:', err);
+      }
+    }
+
+    function renderPerfilCliente() {
+      document.getElementById('datos-perfil').innerHTML = `
+        <strong>Cédula:</strong> ${datosCliente.cedula || ''}<br>
+        <strong>Nombre:</strong> ${datosCliente.nombre || ''}<br>
+        <strong>Apellido:</strong> ${datosCliente.apellido || ''}<br>
+        <strong>Email:</strong> ${datosCliente.email || ''}<br>
+        <strong>Ciudad:</strong> ${datosCliente.ciudad || ''}<br>
+        <strong>Dirección:</strong> ${datosCliente.direccion || ''}<br>
+        <strong>Teléfono:</strong> ${datosCliente.telefono || ''}<br>
+        <strong>Fecha nacimiento:</strong> ${datosCliente.fecha_nacimiento ? datosCliente.fecha_nacimiento.substring(0,10) : ''}
+      `;
+    }
+
+    function renderSaludoCliente() {
+      document.getElementById('cliente-nombre').textContent = `${datosCliente.nombre || ''} ${datosCliente.apellido || ''}`;
+    }
+
+    const btnActualizarPerfil = document.getElementById('btn-actualizar-perfil');
+    const modalActualizar = document.getElementById('modal-actualizar-perfil');
+    const formActualizar = document.getElementById('form-actualizar-perfil');
+    const btnCerrarModal = document.getElementById('btn-cerrar-modal');
+
+    btnActualizarPerfil.onclick = () => {
+      // Rellenar el formulario con los datos actuales
+      formActualizar.cedula.value = datosCliente.cedula || '';
+      formActualizar.nombre.value = datosCliente.nombre || '';
+      formActualizar.apellido.value = datosCliente.apellido || '';
+      formActualizar.email.value = datosCliente.email || '';
+      formActualizar.ciudad.value = datosCliente.ciudad || '';
+      formActualizar.direccion.value = datosCliente.direccion || '';
+      formActualizar.telefono.value = datosCliente.telefono || '';
+      formActualizar.fecha_nacimiento.value = datosCliente.fecha_nacimiento ? datosCliente.fecha_nacimiento.substring(0,10) : '';
+      formActualizar.password.value = '';
+      modalActualizar.style.display = 'flex';
+    };
+
+    btnCerrarModal.onclick = () => {
+      modalActualizar.style.display = 'none';
+    };
+
+    formActualizar.onsubmit = async function(e) {
+      e.preventDefault();
+      const datos = {
+        cedula: formActualizar.cedula.value.trim(),
+        nombre: formActualizar.nombre.value.trim(),
+        apellido: formActualizar.apellido.value.trim(),
+        email: formActualizar.email.value.trim(),
+        ciudad: formActualizar.ciudad.value.trim(),
+        direccion: formActualizar.direccion.value.trim(),
+        telefono: formActualizar.telefono.value.trim(),
+        fecha_nacimiento: formActualizar.fecha_nacimiento.value,
+        passwordCliente: formActualizar.password.value.trim()
+      };
+      try {
+        const res = await fetch(`http://localhost:3000/api/clientes/${clienteCedula}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(datos)
+        });
+        if (res.ok) {
+          await obtenerDatosCliente();
+          modalActualizar.style.display = 'none';
+          alert('Perfil actualizado correctamente');
+        } else {
+          alert('Error al actualizar perfil');
+        }
+      } catch (err) {
+        alert('Error de conexión');
+      }
+    };
+
+    document.addEventListener('DOMContentLoaded', obtenerDatosCliente);
+  </script>
+  <script src="admin-productos.js"></script>
+    <script src="admin-clientes.js"></script>
+    <script>
+      // Carrusel para crear producto/cliente
+      const slideProducto = document.getElementById('slide-crear-producto');
+      const slideCliente = document.getElementById('slide-crear-cliente');
+      const btnIzq = document.getElementById('btn-carrusel-izq');
+      const btnDer = document.getElementById('btn-carrusel-der');
+      let crearIndex = 0; // 0: producto, 1: cliente
+
+      function mostrarSlideCrear(idx) {
+        if (idx === 0) {
+          slideProducto.style.display = '';
+          slideCliente.style.display = 'none';
+        } else {
+          slideProducto.style.display = 'none';
+          slideCliente.style.display = '';
+        }
+        crearIndex = idx;
+      }
+      btnIzq.onclick = () => mostrarSlideCrear(0);
+      btnDer.onclick = () => mostrarSlideCrear(1);
+      mostrarSlideCrear(0);
+
+      // Carrusel para listar producto/cliente
+      const slideListarProducto = document.getElementById('slide-listar-producto');
+      const slideListarCliente = document.getElementById('slide-listar-cliente');
+      const btnListarIzq = document.getElementById('btn-carrusel-listar-izq');
+      const btnListarDer = document.getElementById('btn-carrusel-listar-der');
+      let listarIndex = 0; // 0: producto, 1: cliente
+
+      function mostrarSlideListar(idx) {
+        if (idx === 0) {
+          slideListarProducto.style.display = '';
+          slideListarCliente.style.display = 'none';
+        } else {
+          slideListarProducto.style.display = 'none';
+          slideListarCliente.style.display = '';
+        }
+        listarIndex = idx;
+      }
+      btnListarIzq.onclick = () => mostrarSlideListar(0);
+      btnListarDer.onclick = () => mostrarSlideListar(1);
+      mostrarSlideListar(0);
+    </script>
 </body>
+
 </html>
