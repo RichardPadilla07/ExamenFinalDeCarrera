@@ -368,20 +368,6 @@
           </div>
           <button id="btn-carrusel-der" style="background:linear-gradient(90deg,#2575fc,#6a11cb);color:#fff;border:none;border-radius:50%;width:44px;height:44px;font-size:28px;cursor:pointer;margin-left:64px;flex-shrink:0;">&#8594;</button>
         </div>
-        <!-- Modal para editar cliente -->
-        <div id="modal-editar-cliente" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
-          <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
-            <h2 style="color:#2575fc;margin-bottom:10px;">Editar cliente</h2>
-            <form id="form-editar-cliente">
-              <input type="text" name="nombre" placeholder="Nombre" required maxlength="20" class="input-login">
-              <input type="text" name="apellido" placeholder="Apellido" required maxlength="20" class="input-login">
-              <input type="email" name="email" placeholder="Email" required maxlength="40" class="input-login">
-              <input type="text" name="telefono" placeholder="Teléfono" maxlength="15" class="input-login">
-              <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
-              <button type="button" id="btn-cerrar-modal-editar-cliente" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
-            </form>
-          </div>
-        </div>
       </section>
 
       <section id="seccion-pedidos" style="display:none;">
@@ -393,6 +379,25 @@
         </section>
       </section>
     </main>
+      <!-- Modal para editar cliente (mover aquí, fuera de la sección 'Crear') -->
+      <div id="modal-editar-cliente" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+          <h2 style="color:#2575fc;margin-bottom:10px;">Editar cliente</h2>
+          <form id="form-editar-cliente">
+            <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
+            <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+            <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
+            <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
+            <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
+            <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
+            <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
+            <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
+            <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30" class="input-login">
+            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+            <button type="button" id="btn-cerrar-modal-editar-cliente" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+          </form>
+        </div>
+      </div>
   </div>
 
   <script>

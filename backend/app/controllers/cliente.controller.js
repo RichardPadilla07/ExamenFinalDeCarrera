@@ -1,3 +1,11 @@
+exports.getByCedula = (req, res) => {
+  const { cedula } = req.params;
+  db.query('SELECT * FROM clientes WHERE cedula=?', [cedula], (err, results) => {
+    if (err) return res.status(500).json({ error: err });
+    if (results.length === 0) return res.status(404).json({ error: 'Cliente no encontrado' });
+    res.json(results[0]);
+  });
+};
 const db = require('../models/db');
 
 exports.getAll = (req, res) => {
@@ -24,19 +32,19 @@ exports.create = (req, res) => {
 };
 
 exports.update = (req, res) => {
-  const { id } = req.params;
-  const { cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente } = req.body;
-  db.query('UPDATE clientes SET cedula=?, nombre=?, apellido=?, ciudad=?, email=?, direccion=?, telefono=?, fecha_nacimiento=?, passwordCliente=? WHERE id=?',
-    [cedula, nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente, id],
+  const { cedula } = req.params;
+  const { nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente } = req.body;
+  db.query('UPDATE clientes SET nombre=?, apellido=?, ciudad=?, email=?, direccion=?, telefono=?, fecha_nacimiento=?, passwordCliente=? WHERE cedula=?',
+    [nombre, apellido, ciudad, email, direccion, telefono, fecha_nacimiento, passwordCliente, cedula],
     (err) => {
       if (err) return res.status(500).json({ error: err });
-      res.json({ id, cedula, nombre, apellido, ciudad, email });
+      res.json({ cedula, nombre, apellido, ciudad, email });
     });
 };
 
 exports.delete = (req, res) => {
-  const { id } = req.params;
-  db.query('DELETE FROM clientes WHERE id=?', [id], (err) => {
+  const { cedula } = req.params;
+  db.query('DELETE FROM clientes WHERE cedula=?', [cedula], (err) => {
     if (err) return res.status(500).json({ error: err });
     res.json({ message: 'Cliente eliminado' });
   });
