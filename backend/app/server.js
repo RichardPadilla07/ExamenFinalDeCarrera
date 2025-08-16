@@ -35,6 +35,7 @@ app.use("/api/usuarios", require("./routes/usuario.routes"));
 app.use("/api/clientes", require("./routes/cliente.routes"));
 app.use("/api/productos", require("./routes/producto.routes"));
 app.use("/api/pedidos", require("./routes/pedido.routes"));
+app.use("/api/carrito", require("./routes/carrito.routes"));
 
 // Si tienes tutorial.routes.js y lo necesitas, puedes dejarlo así:
 // require("./app/routes/tutorial.routes.js")(app);
