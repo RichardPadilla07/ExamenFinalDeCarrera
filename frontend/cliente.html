@@ -227,7 +227,7 @@
       </div>
       <button id="btn-perfil" class="sidebar-btn">Perfil</button>
       <button id="btn-listar" class="sidebar-btn">Listar</button>
-  <button id="btn-carrito" class="sidebar-btn">Carrito</button>
+      <button id="btn-carrito" class="sidebar-btn">Carrito</button>
       <button id="btn-pedidos" class="sidebar-btn">Pedidos</button>
     </aside>
     <main>
@@ -236,12 +236,15 @@
         <h2 style="color:#2575fc;margin-bottom:10px;">Perfil</h2>
         <p style="margin-bottom:20px;color:#444;">Aquí puedes ver tus datos como cliente.</p>
         <div id="datos-perfil" style="background:#f3f3f3;padding:20px;border-radius:10px;max-width:400px;"></div>
-        <button id="btn-actualizar-perfil" class="btn-login" style="margin-top:18px;width:100%;max-width:400px;">Actualizar perfil</button>
+        <button id="btn-actualizar-perfil" class="btn-login"
+          style="margin-top:18px;width:100%;max-width:400px;">Actualizar perfil</button>
       </section>
 
       <!-- Modal para actualizar perfil -->
-      <div id="modal-actualizar-perfil" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
-        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+      <div id="modal-actualizar-perfil"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div
+          style="background:#fff;padding:32px 28px;border-radius:16px;max-width:400px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
           <h2 style="color:#2575fc;margin-bottom:10px;">Editar perfil</h2>
           <form id="form-actualizar-perfil">
             <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login" disabled>
@@ -254,7 +257,8 @@
             <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
             <input type="password" name="password" placeholder="Nueva contraseña" class="input-login">
             <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
-            <button type="button" id="btn-cerrar-modal" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+            <button type="button" id="btn-cerrar-modal" class="btn-login"
+              style="background:#d32f2f;margin-top:10px;">Cancelar</button>
           </form>
         </div>
       </div>
@@ -263,7 +267,8 @@
         <div id="listar-productos" style="min-height:400px;width:100%;max-width:900px;margin:auto;">
           <h2 style="color:#2575fc;margin-bottom:10px;">Listar Productos</h2>
           <p style="margin-bottom:20px;color:#444;">Este módulo te permite gestionar productos existentes.</p>
-          <div style="overflow-x:auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 8px 32px rgba(106,17,203,0.08);">
+          <div
+            style="overflow-x:auto;background:#fff;padding:20px;border-radius:16px;box-shadow:0 8px 32px rgba(106,17,203,0.08);">
             <table style="min-width:700px;width:100%;">
               <thead>
                 <tr>
@@ -286,8 +291,10 @@
       </section>
 
       <!-- Modal para editar producto -->
-      <div id="modal-editar-producto" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
-        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+      <div id="modal-editar-producto"
+        style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+        <div
+          style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
           <h2 style="color:#2575fc;margin-bottom:10px;">Editar producto</h2>
           <form id="form-editar-producto">
             <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
@@ -299,7 +306,8 @@
             <input type="date" name="fecha_ingreso" placeholder="Fecha ingreso" class="input-login">
             <input type="text" name="proveedor" placeholder="Proveedor" maxlength="20" class="input-login">
             <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
-            <button type="button" id="btn-cerrar-modal-editar" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+            <button type="button" id="btn-cerrar-modal-editar" class="btn-login"
+              style="background:#d32f2f;margin-top:10px;">Cancelar</button>
           </form>
         </div>
       </div>
@@ -321,35 +329,39 @@
         </section>
       </section>
     </main>
-      <!-- Modal para editar cliente (mover aquí, fuera de la sección 'Crear') -->
-      <div id="modal-editar-cliente" style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
-        <div style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
-          <h2 style="color:#2575fc;margin-bottom:10px;">Editar cliente</h2>
-          <form id="form-editar-cliente">
-            <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
-            <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
-            <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
-            <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
-            <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
-            <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
-            <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
-            <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
-            <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30" class="input-login">
-            <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
-            <button type="button" id="btn-cerrar-modal-editar-cliente" class="btn-login" style="background:#d32f2f;margin-top:10px;">Cancelar</button>
-          </form>
-        </div>
+    <!-- Modal para editar cliente (mover aquí, fuera de la sección 'Crear') -->
+    <div id="modal-editar-cliente"
+      style="display:none;position:fixed;top:0;left:0;width:100vw;height:100vh;background:rgba(0,0,0,0.3);z-index:1000;justify-content:center;align-items:center;">
+      <div
+        style="background:#fff;padding:32px 28px;border-radius:16px;max-width:500px;width:90%;box-shadow:0 8px 32px rgba(106,17,203,0.15);position:relative;">
+        <h2 style="color:#2575fc;margin-bottom:10px;">Editar cliente</h2>
+        <form id="form-editar-cliente">
+          <input type="text" name="cedula" placeholder="Cédula" required maxlength="10" class="input-login">
+          <input type="text" name="nombre" placeholder="Nombre" required maxlength="10" class="input-login">
+          <input type="text" name="apellido" placeholder="Apellido" required maxlength="10" class="input-login">
+          <input type="text" name="ciudad" placeholder="Ciudad" required maxlength="10" class="input-login">
+          <input type="email" name="email" placeholder="Email" required maxlength="30" class="input-login">
+          <input type="text" name="direccion" placeholder="Dirección" maxlength="20" class="input-login">
+          <input type="text" name="telefono" placeholder="Teléfono" maxlength="10" class="input-login">
+          <input type="date" name="fecha_nacimiento" placeholder="Fecha de nacimiento" class="input-login">
+          <input type="password" name="passwordCliente" placeholder="Contraseña" required maxlength="30"
+            class="input-login">
+          <button type="submit" class="btn-login" style="margin-top:10px;">Guardar cambios</button>
+          <button type="button" id="btn-cerrar-modal-editar-cliente" class="btn-login"
+            style="background:#d32f2f;margin-top:10px;">Cancelar</button>
+        </form>
       </div>
+    </div>
   </div>
 
   <script>
     const btnPerfil = document.getElementById('btn-perfil');
     const btnListar = document.getElementById('btn-listar');
-  const btnCarrito = document.getElementById('btn-carrito');
+    const btnCarrito = document.getElementById('btn-carrito');
     const btnPedidos = document.getElementById('btn-pedidos');
     const seccionPerfil = document.getElementById('seccion-perfil');
     const seccionListar = document.getElementById('seccion-listar');
-  const seccionCarrito = document.getElementById('seccion-carrito');
+    const seccionCarrito = document.getElementById('seccion-carrito');
     const seccionPedidos = document.getElementById('seccion-pedidos');
 
     window.seccionListar = seccionListar;
@@ -365,7 +377,7 @@
 
     btnPerfil.onclick = () => mostrarSeccion(seccionPerfil);
     btnListar.onclick = () => mostrarSeccion(seccionListar);
-  btnCarrito.onclick = () => mostrarSeccion(seccionCarrito);
+    btnCarrito.onclick = () => mostrarSeccion(seccionCarrito);
     btnPedidos.onclick = () => mostrarSeccion(seccionPedidos);
 
     mostrarSeccion(seccionPerfil);
@@ -397,7 +409,7 @@
         <strong>Ciudad:</strong> ${datosCliente.ciudad || ''}<br>
         <strong>Dirección:</strong> ${datosCliente.direccion || ''}<br>
         <strong>Teléfono:</strong> ${datosCliente.telefono || ''}<br>
-        <strong>Fecha nacimiento:</strong> ${datosCliente.fecha_nacimiento ? datosCliente.fecha_nacimiento.substring(0,10) : ''}
+        <strong>Fecha nacimiento:</strong> ${datosCliente.fecha_nacimiento ? datosCliente.fecha_nacimiento.substring(0, 10) : ''}
       `;
     }
 
@@ -419,7 +431,7 @@
       formActualizar.ciudad.value = datosCliente.ciudad || '';
       formActualizar.direccion.value = datosCliente.direccion || '';
       formActualizar.telefono.value = datosCliente.telefono || '';
-      formActualizar.fecha_nacimiento.value = datosCliente.fecha_nacimiento ? datosCliente.fecha_nacimiento.substring(0,10) : '';
+      formActualizar.fecha_nacimiento.value = datosCliente.fecha_nacimiento ? datosCliente.fecha_nacimiento.substring(0, 10) : '';
       formActualizar.password.value = '';
       modalActualizar.style.display = 'flex';
     };
@@ -428,7 +440,7 @@
       modalActualizar.style.display = 'none';
     };
 
-    formActualizar.onsubmit = async function(e) {
+    formActualizar.onsubmit = async function (e) {
       e.preventDefault();
       const datos = {
         cedula: formActualizar.cedula.value.trim(),
@@ -461,32 +473,124 @@
 
     document.addEventListener('DOMContentLoaded', obtenerDatosCliente);
   </script>
-  <script src="admin-productos.js"></script>
-    <script src="admin-clientes.js"></script>
-    <script>
-      // Carrusel para crear producto/cliente
-      const slideProducto = document.getElementById('slide-crear-producto');
-      const slideCliente = document.getElementById('slide-crear-cliente');
-      const btnIzq = document.getElementById('btn-carrusel-izq');
-      const btnDer = document.getElementById('btn-carrusel-der');
-      let crearIndex = 0; // 0: producto, 1: cliente
+  <!-- <script src="admin-productos.js"></script> -->
+  <script>
+    // Renderizar productos solo con botón 'Agregar al carrito' para cliente
+    function renderProductosTabla(productos) {
+      const tbody = document.getElementById('tabla-productos-body');
+      tbody.innerHTML = '';
+      productos.forEach((prod, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${prod.nombre}</td>
+          <td>${prod.codigo}</td>
+          <td>${prod.descripcion}</td>
+          <td>${prod.categoria}</td>
+          <td>${prod.precio}</td>
+          <td>${prod.stock}</td>
+          <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : ''}</td>
+          <td>${prod.proveedor}</td>
+          <td><button class="btn-login" onclick="agregarAlCarrito('${prod._id || prod.id}')">Agregar al carrito</button></td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
 
-      function mostrarSlideCrear(idx) {
-        if (idx === 0) {
-          slideProducto.style.display = '';
-          slideCliente.style.display = 'none';
-        } else {
-          slideProducto.style.display = 'none';
-          slideCliente.style.display = '';
+    // Función para agregar al carrito (puedes implementar la lógica que desees)
+    function agregarAlCarrito(productoId) {
+      alert('Producto agregado al carrito: ' + productoId);
+      // Aquí puedes agregar la lógica real para añadir al carrito
+    }
+
+    // Obtener productos y renderizar tabla
+    async function obtenerProductos() {
+      try {
+        const res = await fetch('http://localhost:3000/api/productos');
+        if (res.ok) {
+          const productos = await res.json();
+          renderProductosTabla(productos);
         }
-        crearIndex = idx;
+      } catch (err) {
+        console.error('Error al obtener productos:', err);
       }
-      btnIzq.onclick = () => mostrarSlideCrear(0);
-      btnDer.onclick = () => mostrarSlideCrear(1);
-      mostrarSlideCrear(0);
+    }
 
-  // Se eliminó el carrusel de listar clientes, solo queda listar productos
-    </script>
+    document.addEventListener('DOMContentLoaded', obtenerProductos);
+  </script>
+  <script src="admin-clientes.js"></script>
+  <script>
+    // Carrusel para crear producto/cliente
+    const slideProducto = document.getElementById('slide-crear-producto');
+    const slideCliente = document.getElementById('slide-crear-cliente');
+    const btnIzq = document.getElementById('btn-carrusel-izq');
+    const btnDer = document.getElementById('btn-carrusel-der');
+    let crearIndex = 0; // 0: producto, 1: cliente
+
+    function mostrarSlideCrear(idx) {
+      if (idx === 0) {
+        slideProducto.style.display = '';
+        slideCliente.style.display = 'none';
+      } else {
+        slideProducto.style.display = 'none';
+        slideCliente.style.display = '';
+      }
+      crearIndex = idx;
+    }
+    btnIzq.onclick = () => mostrarSlideCrear(0);
+    btnDer.onclick = () => mostrarSlideCrear(1);
+    mostrarSlideCrear(0);
+
+    // Se eliminó el carrusel de listar clientes, solo queda listar productos
+
+    // Renderizar productos solo con botón 'Agregar al carrito'
+    function renderProductosTabla(productos) {
+      const tbody = document.getElementById('tabla-productos-body');
+      tbody.innerHTML = '';
+      productos.forEach((prod, idx) => {
+        const tr = document.createElement('tr');
+        tr.innerHTML = `
+          <td>${idx + 1}</td>
+          <td>${prod.nombre}</td>
+          <td>${prod.codigo}</td>
+          <td>${prod.descripcion}</td>
+          <td>${prod.categoria}</td>
+          <td>${prod.precio}</td>
+          <td>${prod.stock}</td>
+          <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0, 10) : ''}</td>
+          <td>${prod.proveedor}</td>
+          <td><button class="btn-login btn-carrito" onclick="agregarAlCarrito('${prod._id}')">Agregar al carrito</button></td>
+        `;
+    .btn - carrito {
+          font - size: 22px;
+          padding: 18px 0;
+          width: 140px;
+        }
+        tbody.appendChild(tr);
+      });
+    }
+
+    // Función para agregar al carrito (puedes implementar la lógica que desees)
+    function agregarAlCarrito(productoId) {
+      alert('Producto agregado al carrito: ' + productoId);
+      // Aquí puedes agregar la lógica real para añadir al carrito
+    }
+
+    // Obtener productos y renderizar tabla
+    async function obtenerProductos() {
+      try {
+        const res = await fetch('http://localhost:3000/api/productos');
+        if (res.ok) {
+          const productos = await res.json();
+          renderProductosTabla(productos);
+        }
+      } catch (err) {
+        console.error('Error al obtener productos:', err);
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', obtenerProductos);
+  </script>
 </body>
 
 </html>
