@@ -73,7 +73,8 @@ const API_URL = 'http://localhost:3000/api/productos';
 
 document.addEventListener('DOMContentLoaded', () => {
   cargarProductos();
-  document.getElementById('form-producto').onsubmit = handleCrearProducto;
+  const formProducto = document.getElementById('form-producto');
+  if (formProducto) formProducto.onsubmit = handleCrearProducto;
 });
 
 async function cargarProductos() {
@@ -94,7 +95,7 @@ async function cargarProductos() {
         <td>${prod.stock}</td>
         <td>${prod.fecha_ingreso ? prod.fecha_ingreso.substring(0,10) : ''}</td>
         <td>${prod.proveedor || ''}</td>
-        <td>
+        <td style="display:flex;gap:8px;justify-content:center;align-items:center;">
           <button onclick="editarProducto(${prod.id})">✏️</button>
           <button onclick="eliminarProducto(${prod.id})">🗑️</button>
         </td>
